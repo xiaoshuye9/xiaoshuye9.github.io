@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - 页面未找到</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 60px 40px;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 20px;
+            transition: all 0.5s ease;
+        }
+        
+        h1 {
+            font-size: 10rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: 5px;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 2px;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin: 25px 0;
+            font-weight: 600;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.9);
+            animation: slideUp 1.2s ease-out;
+        }
+        
+        .decorations {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .circle-1 {
+            width: 120px;
+            height: 120px;
+            top: 15%;
+            left: 10%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .circle-2 {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            right: 15%;
+            animation: float 10s ease-in-out infinite 1s;
+        }
+        
+        .circle-3 {
+            width: 50px;
+            height: 50px;
+            top: 40%;
+            right: 20%;
+            animation: float 7s ease-in-out infinite 0.5s;
+        }
+        
+        .circle-4 {
+            width: 70px;
+            height: 70px;
+            bottom: 30%;
+            left: 20%;
+            animation: float 9s ease-in-out infinite 1.5s;
+        }
+        
+        .circle-5 {
+            width: 40px;
+            height: 40px;
+            top: 20%;
+            right: 25%;
+            animation: float 6s ease-in-out infinite 0.8s;
+        }
+        
+        .star {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.7;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        
+        .star-1 { top: 25%; left: 15%; animation-delay: 0s; }
+        .star-2 { top: 40%; left: 85%; animation-delay: 1s; }
+        .star-3 { top: 70%; left: 10%; animation-delay: 2s; }
+        .star-4 { top: 65%; left: 90%; animation-delay: 0.5s; }
+        .star-5 { top: 15%; left: 75%; animation-delay: 1.5s; }
+        .star-6 { top: 80%; left: 30%; animation-delay: 0.8s; }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes twinkle {
+            0% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 0.9;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+        }
+        
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 7rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1.1rem;
+            }
+            .circle {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 5rem;
+            }
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+        
+        .message {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            animation: fadeIn 2s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="decorations">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+        <div class="circle circle-4"></div>
+        <div class="circle circle-5"></div>
+        
+        <div class="star star-1">✦</div>
+        <div class="star star-2">✦</div>
+        <div class="star star-3">✦</div>
+        <div class="star star-4">✦</div>
+        <div class="star star-5">✦</div>
+        <div class="star star-6">✦</div>
+    </div>
+    
+    <div class="container">
+        <h1>404</h1>
+        <h2>页面消失在数字宇宙中</h2>
+        <p>您寻找的页面可能已被移除、重命名或暂时不可用。在浩瀚的网络空间中，有时我们会迷失方向，但这只是暂时的。请享受这个精心设计的404页面，作为您探索旅程中的一个小小停靠点。</p>
+    </div>
+    
+    <div class="message">
+        
+    </div>
+
+    <script>
+        // 添加悬浮动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            
+            // 鼠标移动时的视差效果
+            document.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            });
+            
+            // 鼠标进入容器时的效果
+            container.addEventListener('mouseenter', () => {
+                container.style.transition = 'none';
+            });
+            
+            // 鼠标离开容器时的效果
+            container.addEventListener('mouseleave', () => {
+                container.style.transition = 'all 0.5s ease';
+                container.style.transform = 'rotateY(0deg) rotateX(0deg)';
+            });
+            
+            // 添加星星闪烁动画
+            const stars = document.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                // 随机化动画延迟
+                const delay = Math.random() * 2;
+                star.style.animationDelay = `${delay}s`;
+                
+                // 随机化大小
+                const size = 1 + Math.random() * 1.5;
+                star.style.fontSize = `${size}rem`;
+            });
+        });
+    </script>
+</body>
+</html>
