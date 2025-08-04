@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃蛇游戏</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            background-color: #fff;
+            border: 1px solid #000;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <button id="restartButton" style="display: none;">重新开始</button>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const box = 20;
+        let snake, direction, food, game;
+
+        function init() {
+            snake = [{ x: 9 * box, y: 9 * box }];
+            direction = 'RIGHT';
+            food = { x: Math.floor(Math.random() * 20) * box, y: Math.floor(Math.random() * 20) * box };
+            document.getElementById('restartButton').style.display = 'none';
+            game = setInterval(draw, 200); // 蛇运动速度降低
+        }
+
+        document.addEventListener('keydown', directionChange);
+        document.getElementById('restartButton').addEventListener('click', init);
+
+        function directionChange(event) {
+            if (event.keyCode == 37 && direction != 'RIGHT') direction = 'LEFT';
+            else if (event.keyCode == 38 && direction != 'DOWN') direction = 'UP';
+            else if (event.keyCode == 39 && direction != 'LEFT') direction = 'RIGHT';
+            else if (event.keyCode == 40 && direction != 'UP') direction = 'DOWN';
+        }
+
+        function collision(head, array) {
+            for (let i = 0; i < array.length; i++) {
+                if (head.x === array[i].x && head.y === array[i].y) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < snake.length; i++) {
+                ctx.fillStyle = (i === 0) ? 'green' : 'lightgreen';
+                ctx.fillRect(snake[i].x, snake[i].y, box, box);
+                ctx.strokeStyle = 'darkgreen';
+                ctx.strokeRect(snake[i].x, snake[i].y, box, box);
+            }
+
+            ctx.fillStyle = 'red';
+            ctx.fillRect(food.x, food.y, box, box);
+
+            let snakeX = snake[0].x;
+            let snakeY = snake[0].y;
+
+            if (direction === 'LEFT') snakeX -= box;
+            if (direction === 'UP') snakeY -= box;
+            if (direction === 'RIGHT') snakeX += box;
+            if (direction === 'DOWN') snakeY += box;
+
+            if (snakeX === food.x && snakeY === food.y) {
+                food = { x: Math.floor(Math.random() * 20) * box, y: Math.floor(Math.random() * 20) * box };
+            } else {
+                snake.pop();
+            }
+
+            let newHead = { x: snakeX, y: snakeY };
+
+            if (snakeX < 0 || snakeY < 0 || snakeX >= canvas.width || snakeY >= canvas.height || collision(newHead, snake)) {
+                clearInterval(game);
+                document.getElementById('restartButton').style.display = 'block'; // 显示重新开始按钮
+                alert("游戏结束！");
+            }
+
+            snake.unshift(newHead);
+        }
+
+        init(); // 初始化游戏
+    </script>
+</body>
+</html>
